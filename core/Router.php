@@ -25,9 +25,9 @@ class Router
 	{
 		$path = $this->request->getPath();
 		$method = $this->request->getMethod();
-		echo '<pre>';
-		var_dump($this->routes);
-		echo '</pre>';
+		//echo '<pre>';
+		//var_dump($this->routes);
+		//echo '</pre>';
 		$callback = $this->routes[$method][$path] ?? false;
 
 		if(!$callback){
@@ -38,12 +38,12 @@ class Router
 			return $this->renderView($callback);
 		}
 
-		echo '<pre>';
-		var_dump($callback);
-		var_dump($path);
-		var_dump($method);
-		var_dump($_SERVER);
-		echo '</pre>';
+		//echo '<pre>';
+		//var_dump($callback);
+		//var_dump($path);
+		//var_dump($method);
+		//var_dump($_SERVER);
+		//echo '</pre>';
 
 		return call_user_func($callback);
 	}

@@ -10,9 +10,7 @@
 		return 'Hello world from router';
 	});
 
-	$app->router->get('/contact', function(){
-		return 'Hello world from router, Contact';
-	});
+	$app->router->get('/contact', 'contact');
 
 	$app->run();
 ?>

@@ -31,8 +31,11 @@ class Router
 		$callback = $this->routes[$method][$path] ?? false;
 
 		if(!$callback){
-			echo "Not found";
-			exit;
+			return "Not found";
+		}
+
+		if(is_string($callback)){
+			return $this->renderView($callback);
 		}
 
 		echo '<pre>';
@@ -42,8 +45,11 @@ class Router
 		var_dump($_SERVER);
 		echo '</pre>';
 
-		echo(call_user_func($callback));
-		exit;
+		return call_user_func($callback);
+	}
+
+	public function renderView($viewName){
+		include_once __DIR__."/../views/$viewName.php";
 	}
 	
 }

@@ -18,7 +18,7 @@ class Application{
 	}
 
 	public function run(){
-		$this->router->resolve();
+		echo $this->router->resolve();
 	}
 }
 ?>

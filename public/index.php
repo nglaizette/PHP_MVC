@@ -4,7 +4,7 @@
 	use app\core\Application;
 
 	//echo "Hello world";
-	$app = new Application();
+	$app = new Application(dirname(__DIR__));
 
 	$app->router->get('/', 'home');
 

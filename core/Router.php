@@ -49,7 +49,22 @@ class Router
 	}
 
 	public function renderView($viewName){
-		include_once __DIR__."/../views/$viewName.php";
+
+		$layoutContent = $this->layoutContent();
+		$viewContent = $this->renderOnlyView($viewName);
+		return str_replace('{{content}}',$viewContent, $layoutContent);
+	}
+
+	protected function layoutContent(){
+		ob_start();
+		include_once Application::$ROOT_DIR."/views/layouts/main.php";
+		return ob_get_clean();
+	}
+
+	protected function renderOnlyView($viewName){
+		ob_start();
+		include_once Application::$ROOT_DIR."/views/$viewName.php";
+		return ob_get_clean();
 	}
 	
 }

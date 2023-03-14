@@ -1,0 +1,2 @@
+pour lancer le server php : php -S localhost:8080
+ouvrir la page: http://localhost:8080

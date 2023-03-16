@@ -1,14 +1,15 @@
 <?php
 
-	require_once __DIR__.'/../vendor/autoload.php';
-	use app\core\Application;
+require_once __DIR__.'/../vendor/autoload.php';
 
-	//echo "Hello world";
-	$app = new Application(dirname(__DIR__));
+use app\controllers\SiteController;
+use app\core\Application;
 
-	$app->router->get('/', 'home');
+$app = new Application(dirname(__DIR__));
 
-	$app->router->get('/contact', 'contact');
+$app->router->get('/', 'home');
+$app->router->get('/contact', [SiteController::class,'contact']);
+$app->router->post('/contact', [SiteController::class, 'handleContact']);
 
-	$app->run();
+$app->run();
 ?>

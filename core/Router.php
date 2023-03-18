@@ -38,6 +38,7 @@ class Router
 		$callback = $this->routes[$method][$path] ?? false;
 
 		if(!$callback){
+			Application::$app->setController(new Controller());
 			$this->response->setStatusCode(404);
 			return $this->renderView("_404");
 		}
@@ -47,8 +48,8 @@ class Router
 		}
 
 		if(is_array($callback)){
-			$callback[0] = new $callback[0](); // creation of an instance of the proper type
-
+			Application::$app->setController(new $callback[0]()); // creation of an instance of the proper type
+			$callback[0] = Application::$app->getController();
 		}
 
 		//echo '<pre>';
@@ -69,8 +70,9 @@ class Router
 	}
 
 	protected function layoutContent(){
+		$layout = Application::$app->getController()->layout;
 		ob_start();
-		include_once Application::$ROOT_DIR."/views/layouts/main.php";
+		include_once Application::$ROOT_DIR."/views/layouts/$layout.php";
 		return ob_get_clean();
 	}
 

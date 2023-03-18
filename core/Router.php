@@ -31,7 +31,7 @@ class Router
 	public function resolve()
 	{
 		$path = $this->request->getPath();
-		$method = $this->request->getMethod();
+		$method = $this->request->method();
 		//echo '<pre>';
 		//var_dump($this->routes);
 		//echo '</pre>';
@@ -58,7 +58,7 @@ class Router
 		//var_dump($_SERVER);
 		//echo '</pre>';
 
-		return call_user_func($callback);
+		return call_user_func($callback, $this->request);
 	}
 
 	public function renderView($viewName, $params=[]){

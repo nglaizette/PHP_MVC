@@ -61,10 +61,10 @@ class Router
 		return call_user_func($callback);
 	}
 
-	public function renderView($viewName){
+	public function renderView($viewName, $params=[]){
 
 		$layoutContent = $this->layoutContent();
-		$viewContent = $this->renderOnlyView($viewName);
+		$viewContent = $this->renderOnlyView($viewName, $params);
 		return str_replace('{{content}}',$viewContent, $layoutContent);
 	}
 
@@ -74,7 +74,15 @@ class Router
 		return ob_get_clean();
 	}
 
-	protected function renderOnlyView($viewName){
+	protected function renderOnlyView($viewName, $params){
+		//echo '<pre>';
+		//var_dump($params);
+		//echo '</pre>';
+
+		// tricky part to transform the name of the hashmap into a variable name
+		foreach($params as $key => $value){
+			$$key = $value;
+		}
 		ob_start();
 		include_once Application::$ROOT_DIR."/views/$viewName.php";
 		return ob_get_clean();

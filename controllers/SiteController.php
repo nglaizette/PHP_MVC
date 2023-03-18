@@ -2,8 +2,9 @@
 namespace app\controllers;
 
 use app\core\Application;
+use app\core\Controller;
 
-class SiteController{
+class SiteController extends Controller{
 
 
 	public function home(){
@@ -11,14 +12,14 @@ class SiteController{
 			'name' => "Nico"
 		];
 
-		return Application::$app->router->renderView('home');
+		return $this->render('home', $params);
 	}
 	public function handleContact(){
 		return 'Handling submitted data';
 	}
 
 	public function contact(){
-		return Application::$app->router->renderView('contact');
+		return $this->render('contact');
 	}
 }
 ?>

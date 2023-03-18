@@ -24,8 +24,14 @@ class AuthController extends Controller{
 			var_dump($registerModel);
 			echo '</pre>';
 			if($registerModel->validate() && $registerModel->register()){
+				echo '<pre>';
+				var_dump($registerModel->errors);
+				echo '</pre>';
 				return 'Success';
 			}
+			echo '<pre>';
+			var_dump($registerModel->errors);
+			echo '</pre>';
 
 			return $this->render('register', [
 				'model' => $registerModel

@@ -59,16 +59,16 @@ class Database
 			$instances = new $className();
 			//var_dump($instances);
 
-			echo "Applying migration $migration".PHP_EOL;
+			$this->log("Applying migration $migration");
 			$instances->up();
-			echo "Applied migration $migration".PHP_EOL;
+			$this->log("Applied migration $migration");
 			$newMigrations[] = $migration;
 		}
 
 		if(!empty($newMigrations)){
 			$this->saveMigrations($newMigrations);
 		} else {
-			echo "All migrations have been applied";
+			$this->log("All migrations have been applied");
 		}
 	}
 
@@ -98,5 +98,9 @@ class Database
 		var_dump($str);
 		$statement = $this->pdo->prepare("INSERT INTO migrations (migration) VALUES $str ");
 		$statement->execute();
+	}
+
+	protected function log($message){
+		echo '['.date('Y-m-d H:i:s').'] - '.$message.PHP_EOL;
 	}
 }

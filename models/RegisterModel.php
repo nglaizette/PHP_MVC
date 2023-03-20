@@ -1,15 +1,15 @@
 <?php
 namespace app\models;
 
-use app\core\Model;
+use app\core\DbModel;
 
-class RegisterModel extends Model{
+class RegisterModel extends DbModel { 
 
 	public string $firstname='';
 	public string $lastname='';
 	public string $email='';
 	public string $password='';
-	public string $confirmPassword='';
+	public string $confirmPassword=''; 
 
 	public function rules():array{
 		return [
@@ -21,9 +21,21 @@ class RegisterModel extends Model{
 		];
 	}
 
+
+	public function tableName(): string
+	{
+		return 'users';
+	}
+
 	public function register():bool{
 		echo "Creation new user";
-		return true;
+		return $this->save();
 	}
+
+	public function attributes(): array
+	{
+		return ['firstname', 'lastname', 'email', 'password'];
+	}
+
 
 }

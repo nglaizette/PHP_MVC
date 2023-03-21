@@ -22,9 +22,9 @@ namespace app\core;
 		$params = array_map(fn($attr) => ":$attr", $attributes);
 		$statement = self::prepare("INSERT INTO $tableName (".implode(',',$attributes).") VALUES  (".implode(',', $params).");");
 
-		echo "<pre>";
-		var_dump($statement, $params, $attributes);
-		echo "</pre>";
+		//echo "<pre>";
+		//var_dump($statement, $params, $attributes);
+		//echo "</pre>";
 
 		foreach($attributes as $attribute){
 			$statement->bindValue(":$attribute", $this->{$attribute});

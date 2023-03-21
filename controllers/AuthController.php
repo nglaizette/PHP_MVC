@@ -23,7 +23,7 @@ class AuthController extends Controller{
 			echo '<pre>';
 			var_dump($user);
 			echo '</pre>';
-			if($user->validate() && $user->register()){
+			if($user->validate() && $user->save()){
 				echo '<pre>';
 				var_dump($user->errors);
 				echo '</pre>';

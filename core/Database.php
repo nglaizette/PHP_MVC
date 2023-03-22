@@ -19,11 +19,11 @@ class Database
 		$dsn      = $config['dsn'] ?? ''; //domain service name
 		$user     = $config['user'] ?? '';
 		$password = $config['password'] ?? '';
-		echo '<pre>';
-		var_dump($dsn);
-		var_dump($user);
-		var_dump($password);
-		echo '</pre>'.PHP_EOL;
+		//echo '<pre>';
+		//var_dump($dsn);
+		//var_dump($user);
+		//var_dump($password);
+		//echo '</pre>'.PHP_EOL;
 		$this->pdo = new PDO($dsn, $user, $password);
 		$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

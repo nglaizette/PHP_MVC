@@ -30,7 +30,8 @@ namespace app\core;
 			$statement->bindValue(":$attribute", $this->{$attribute});
 		}
 
-		$statement->execute();
+		return $statement->execute();
+		
 	}
 
 	public static function prepare($sql){

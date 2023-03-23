@@ -23,14 +23,14 @@ class Field{
 	{
 		return sprintf('
 			<div class="mb-3">
-    			<label class="form-label">%s</label>
+    			<label class="form-label">%s:</label>
     			<input type="%s" class="form-control%s" name="%s" value="%s">
 				<div class="invalid-feedback">
 					%s
 				</div>
   			</div>
 			', 
-			$this->model->labels()[$this->attribute] ?? $this->attribute,
+			$this->model->getLabel($this->attribute),
 			$this->type,
 			$this->model->hasError($this->attribute) ? ' is-invalid' : '',
 			$this->attribute,

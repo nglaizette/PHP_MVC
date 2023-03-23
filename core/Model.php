@@ -24,6 +24,10 @@ abstract class Model
 		return [];
 	}
 
+	public function getLabel($attribute){
+		return $this->labels()[$attribute] ?? $attribute;
+	}
+
 	public array $errors = [];
 
 	public function validate():bool{
@@ -58,6 +62,7 @@ abstract class Model
 				}
 
 				if($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}){
+					$rule['match'] = $this->getLabel($rule['match']);
 					$this->addError($attribute, self::RULE_MATCH, $rule);
 				}
 
@@ -73,11 +78,9 @@ abstract class Model
 					$record = $statement->fetchObject();
 					//var_dump($record);
 					if($record){
-						$this->addError($attribute, self::RULE_UNIQUE, ['field' => $attribute]);
+						$this->addError($attribute, self::RULE_UNIQUE, ['field' => $this->getLabel($attribute)]);
 					}
-
 				}
-				
 			}
 		}
 	   return empty($this->errors);

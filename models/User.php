@@ -31,11 +31,11 @@ class User extends DbModel {
 	public function labels(): array
 	{
 		return [
-			'firstname' => 'First name:',
-			'lastname' => 'Last name:',
-			'email' => 'Email:',
-			'password' => 'Password:',
-			'confirmPassword'=>'Confirm password:'
+			'firstname' => 'First name',
+			'lastname' => 'Last name',
+			'email' => 'Email',
+			'password' => 'Password',
+			'confirmPassword'=>'Confirm password'
 		];
 	}
 

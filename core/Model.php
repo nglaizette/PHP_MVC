@@ -19,6 +19,11 @@ abstract class Model
 
 	abstract public function rules():array;
 
+	public function labels():array
+	{
+		return [];
+	}
+
 	public array $errors = [];
 
 	public function validate():bool{

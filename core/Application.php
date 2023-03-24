@@ -17,7 +17,7 @@ class Application{
 	public Request $request;
 	public Response $response;
 	public Session $session;
-	public ?DbModel $user;
+	public ?UserModel $user;
 
 	public Database $db;
 	public Controller $controller;
@@ -45,6 +45,11 @@ class Application{
 		} else {
 			$this->user = null;
 		}
+	}
+
+	public static function isGuest()
+	{
+		return !self::$app->user;
 	}
 
 	public function run(){

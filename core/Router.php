@@ -1,6 +1,8 @@
 <?php
 namespace app\core;
 
+use app\core\exception\NotFoundException;
+
 /**
  *  Class Router
  *  @author ngvg
@@ -39,8 +41,7 @@ class Router
 
 		if(!$callback){
 			Application::$app->setController(new Controller());
-			$this->response->setStatusCode(404);
-			return $this->renderView("_404");
+			throw new NotFoundException();
 		}
 
 		if(is_string($callback)){
@@ -48,8 +49,16 @@ class Router
 		}
 
 		if(is_array($callback)){
-			Application::$app->setController(new $callback[0]()); // creation of an instance of the proper type
+			//** @var \app\core\Controller $contorller */
+			$controller = new $callback[0]();// creation of an instance of the proper type
+			Application::$app->setController($controller); 
+			Application::$app->controller->action = $callback[1];
 			$callback[0] = Application::$app->getController();
+
+			foreach($controller->getMiddlewares() as $middleware){
+				$middleware->execute();
+			}
+
 		}
 
 		//echo '<pre>';
@@ -70,7 +79,11 @@ class Router
 	}
 
 	protected function layoutContent(){
-		$layout = Application::$app->getController()->layout;
+		$layout = Application::$app->layout;
+		if(Application::$app->controller)
+		{
+			$layout = Application::$app->getController()->layout;
+		}
 		ob_start();
 		include_once Application::$ROOT_DIR."/views/layouts/$layout.php";
 		return ob_get_clean();

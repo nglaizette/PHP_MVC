@@ -14,7 +14,9 @@ class User extends DbModel {
 	public string $email='';
 	public int $status = self::STATUS_INACTIVE;
 	public string $password='';
-	public string $confirmPassword=''; 
+	public string $confirmPassword='';
+	public string $id='';
+	public string $created_at='';
 
 	public function rules():array{
 		return [
@@ -39,6 +41,10 @@ class User extends DbModel {
 		];
 	}
 
+	public function primaryKey(): string
+	{
+		return 'id';
+	}
 	public function tableName(): string
 	{
 		return 'users';
@@ -55,6 +61,4 @@ class User extends DbModel {
 	{
 		return ['firstname', 'lastname', 'email', 'password', 'status'];
 	}
-
-
 }

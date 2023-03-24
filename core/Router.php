@@ -59,7 +59,7 @@ class Router
 		//var_dump($_SERVER);
 		//echo '</pre>';
 
-		return call_user_func($callback, $this->request);
+		return call_user_func($callback, $this->request, $this->response);
 	}
 
 	public function renderView($viewName, $params=[]){

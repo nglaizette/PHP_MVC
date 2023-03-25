@@ -47,7 +47,7 @@ class AuthController extends Controller{
 				//echo '<pre>';
 				//var_dump($user->errors);
 				//echo '</pre>';
-				\app\core\Application::$app->session->setFlash('sucess', 'Thanks for registering');
+				\app\core\Application::$app->session->setFlash('success', 'Thanks for registering');
 				\app\core\Application::$app->response->redirect('/');
 				return 'Success';
 			}
